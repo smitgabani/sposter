@@ -1,0 +1,101 @@
+<h1>Browse Music</h1>
+<strong><h2 style="font-size: 40px;">Sign in access more.</h2></strong>
+<h2>Top Track</h2>
+<div class="content" *ngIf="tracks">
+  These are the <strong>top 10 global tracks</strong>.
+  <mat-list>
+    <mat-list-item *ngFor="let item of tracks">
+      <mat-icon mat-list-icon>audiotrack</mat-icon>
+      <div mat-line>
+        <mat-card>
+          <mat-card-content
+            >{{ item.track.name }} -
+            by {{ item.track.artists[0].name}}
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </mat-list-item>
+  </mat-list>
+</div>
+<br/>
+<h2>New Releases</h2>
+<div class="content" *ngIf="newReleases">
+  These are the <strong>new releases</strong> in Canada.
+  <div fxLayout="row wrap" fxLayout.xs="column">
+    <div class="content">
+      <div fxLayout="row wrap" fxLayout.xs="column"></div>
+    </div>
+
+    <div
+      fxFlex
+      *ngFor="let item of newReleases; let i = index"
+      [style.margin]="'20px'"
+    >
+      <mat-card [style.min-width]="'200px'">
+        <mat-card-header>
+          <mat-card-title>{{ item.name }}</mat-card-title>
+          <mat-card-subtitle>Album</mat-card-subtitle>
+        </mat-card-header>
+        <a class="nav-link" [routerLink]="['/album', item.id]">
+          <img
+            mat-card-image
+            class="-cover"
+            src="{{ item.images[0].url }}"
+            alt="album art"
+          />
+        </a>
+
+        <strong>Release Date: </strong>{{ item.release_date }}<br />
+        <strong>Tracks: </strong>{{ item.total_tracks }}<br /><br />
+        <mat-card-content>
+          <mat-chip-list aria-label="Artist selection">
+            <mat-chip
+              *ngFor="let artist of item.artists; let i = index"
+              [routerLink]="['/artist', artist.id]"
+            >
+              {{ artist.name }}
+            </mat-chip>
+          </mat-chip-list>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <!-- -->
+  </div>
+</div>
+<br />
+<h2>Playlists</h2>
+<div class="content">
+  These are the <strong>top playlists</strong> in Canada.
+  <div fxLayout="row wrap" fxLayout.xs="column">
+    <div class="content">
+      <div fxLayout="row wrap" fxLayout.xs="column"></div>
+    </div>
+
+    <div
+      fxFlex
+      [style.margin]="'20px'"
+      *ngFor="let item of playlists; let i = index"
+    >
+    <mat-card [style.min-width]="'200px'">
+      <mat-card-header>
+        <mat-card-title>{{ item.name }}</mat-card-title>
+        <mat-card-subtitle>Featured Playlists</mat-card-subtitle>
+      </mat-card-header>
+      <a class="nav-link" [routerLink]="['/playlist', item.id]">
+        <img
+          mat-card-image
+          class="-cover"
+          src="{{ item.images[0].url }}"
+          alt="album art"
+        />
+      </a>
+      <strong>Tracks: </strong>{{ item.tracks.total}}<br /><br />
+      <mat-card-content>
+        <mat-chip-list aria-label="Artist selection">
+        </mat-chip-list>
+      </mat-card-content>
+    </mat-card>
+    </div>
+    <!-- -->
+  </div>
+</div>
