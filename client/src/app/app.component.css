@@ -1,0 +1,12 @@
+footer {
+    background-color: rgb(10, 12, 16) ;
+    height: 15vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  .footer-inner {
+    height: 5vh;
+    width: 60%;
+    border-top: 1px solid white;
+  }
