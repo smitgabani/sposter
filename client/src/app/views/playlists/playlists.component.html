@@ -1,0 +1,45 @@
+
+<h1>Playlists</h1>
+<div>The following is a list of playlists releases.</div>
+<div>
+  Click the <strong>playlist</strong> to view list of tracks.
+</div>
+<br />
+
+<div class="content" *ngIf="playlistsRelease">
+  <div fxLayout="row wrap" fxLayout.xs="column">
+    <div class="content">
+      <div fxLayout="row wrap" fxLayout.xs="column"></div>
+    </div>
+
+    <div
+      fxFlex
+      *ngFor="let item of playlistsRelease.playlists.items; let i = index"
+      [style.margin]="'20px'"
+    >
+      <mat-card [style.min-width]="'200px'">
+        <mat-card-header>
+          <mat-card-title>{{ item.name }}</mat-card-title>
+          <mat-card-subtitle>Featured Playlists</mat-card-subtitle>
+        </mat-card-header>
+        <a class="nav-link" [routerLink]="['/playlist', item.id]">
+          <img
+            mat-card-image
+            class="-cover"
+            src="{{ item.images[0].url }}"
+            alt="album art"
+          />
+        </a>
+        <strong>Tracks: </strong>{{ item.tracks.total}}<br /><br />
+        <mat-card-content>
+          <mat-chip-list aria-label="Artist selection">
+            <mat-icon mat-list-icon>
+                library_add
+              </mat-icon>
+          </mat-chip-list>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <!-- -->
+  </div>
+</div>
