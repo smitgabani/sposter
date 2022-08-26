@@ -1,0 +1,142 @@
+<h1>Results for: &ldquo;{{ searchQuery }}&rdquo;</h1>
+<p>
+  The following is a list of results matching the query.<br />
+
+</p>
+<br />
+<h2>Track Listing</h2>
+
+<div class="content" *ngIf="results.tracks.total == 0">No tracks found</div>
+<div class="content" *ngIf="results.tracks.items">
+  Click the <strong>music icon</strong> to add the trck to your favourite list.
+  <mat-list>
+    <mat-list-item *ngFor="let item of results.tracks.items">
+      <mat-icon mat-list-icon>queue_music</mat-icon>
+      <div mat-line>
+        <mat-card>
+          <mat-card-content
+            >{{ item.name }} -
+            by {{ item.artists[0].name}}
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </mat-list-item>
+  </mat-list>
+</div>
+
+<h2>Artists</h2>
+<div class="content" *ngIf="results.artists.total == 0">No artists found</div>
+<div class="content" *ngIf="results.artists.items">
+  Click the <strong>artist image</strong> for more information about the artist.
+  <div fxLayout="row wrap" fxLayout.xs="column">
+    <div
+      *ngFor="let item of results.artists.items let i = index"
+      fxFlex
+      [style.margin]="'20px'"
+    >
+      <mat-card [style.min-width]="'200px'">
+        <mat-card-header>
+          <mat-card-title>{{ item.name }}</mat-card-title>
+          <mat-card-subtitle>Artist</mat-card-subtitle>
+        </mat-card-header>
+        <img
+          [routerLink]="['/artist', item.id]"
+          mat-card-image
+          class="album-cover"
+          src="{{ item.images[1].url }}"
+          alt="{{ item.name }}"
+        />
+        <mat-card-content>
+          <strong>Followers: </strong>{{ item.followers.total }}<br />
+          <strong>Popularity: </strong>{{ item.popularity }}
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <!-- -->
+  </div>
+</div>
+<h2>Albums</h2>
+<div class="content" *ngIf="results.albums.total == 0">No Albums found</div>
+<div class="content" *ngIf="results.albums.items">
+  Click the <strong>album image</strong> for more information about the album.
+  <div fxLayout="row wrap" fxLayout.xs="column">
+    <div class="content">
+      <div fxLayout="row wrap" fxLayout.xs="column"></div>
+    </div>
+
+    <div
+      fxFlex
+      *ngFor="let item of results.albums.items; let i = index"
+      [style.margin]="'20px'"
+    >
+      <mat-card [style.min-width]="'200px'">
+        <mat-card-header>
+          <mat-card-title>{{ item.name }}</mat-card-title>
+          <mat-card-subtitle>Album</mat-card-subtitle>
+        </mat-card-header>
+        <a class="nav-link" [routerLink]="['/album', item.id]">
+          <img
+            mat-card-image
+            class="-cover"
+            src="{{ item.images[0].url }}"
+            alt="album art"
+          />
+        </a>
+
+        <strong>Release Date: </strong>{{ item.release_date }}<br />
+        <strong>Tracks: </strong>{{ item.total_tracks }}<br /><br />
+        <mat-card-content>
+          <mat-chip-list aria-label="Artist selection">
+            <mat-chip
+              *ngFor="let artist of item.artists; let i = index"
+              [routerLink]="['/artist', artist.id]"
+            >
+              {{ artist.name }}
+            </mat-chip>
+          </mat-chip-list>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <!-- -->
+  </div>
+</div>
+<h2>Playlists</h2>
+<div class="content" *ngIf="results.playlists.total == 0">No playlists found</div>
+<div class="content" *ngIf="results.playlists.items">
+  Click the <strong>add icon</strong> to add the playlist in your collection.
+  <div fxLayout="row wrap" fxLayout.xs="column">
+    <div class="content">
+      <div fxLayout="row wrap" fxLayout.xs="column"></div>
+    </div>
+
+    <div
+      fxFlex
+      *ngFor="let item of results.playlists.items; let i = index"
+      [style.margin]="'20px'"
+    >
+      <mat-card [style.min-width]="'200px'">
+        <mat-card-header>
+          <mat-card-title>{{ item.name }}</mat-card-title>
+          <mat-card-subtitle>Featured Playlists</mat-card-subtitle>
+        </mat-card-header>
+        <a class="nav-link" [routerLink]="['/playlist', item.id]">
+          <img
+            mat-card-image
+            class="-cover"
+            src="{{ item.images[0].url }}"
+            alt="album art"
+          />
+        </a>
+        <strong>Tracks: </strong>{{ item.tracks.total}}<br /><br />
+        <mat-card-content>
+          <mat-chip-list aria-label="Artist selection">
+            <mat-icon mat-list-icon>
+                library_add
+              </mat-icon>
+          </mat-chip-list>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <!-- -->
+  </div>
+</div>
