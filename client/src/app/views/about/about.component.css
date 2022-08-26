@@ -1,0 +1,8 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+.fullscreen {
+    height: 80vh;
+    width: 95vw;
+}
